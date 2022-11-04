@@ -2,6 +2,48 @@ function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
+const refs = {
+  boxesWrapper: document.querySelector('#boxes'),
+  createBtn: document.querySelector('[data-create]'),
+  destroyBtn: document.querySelector('[data-destroy]'),
+  input: document.querySelector('input'),
+};
+
+const newArr = [];
+let divSize = 30;
+
+function createBox() {
+  const box = document.createElement('div');
+  box.style.width = `${divSize}px`;
+  box.style.height = `${divSize}px`;
+  box.style.backgroundColor = getRandomHexColor();
+  newArr.push(box);
+}
+
+const createBoxes = function (amount) {
+  for (let i = 0; i <= amount; i += 1) {
+    createBox();
+    divSize += 10;
+  }
+  refs.boxesWrapper.append(...newArr);
+};
+
+const destroyBoxes = () => {
+  refs.boxesWrapper.innerHTML = '';
+  refs.input.value = '';
+};
+
+refs.createBtn.addEventListener('click', () => {
+  let amount = refs.input.value;
+  if (amount === '') {
+    alert('Please enter a number!');
+  } else {
+    createBoxes(amount);
+  }
+});
+
+refs.destroyBtn.addEventListener('click', destroyBoxes);
+
 // Напиши скрипт створення і очищення колекції елементів.
 //  Користувач вводить кількість елементів в input і натискає кнопку
 // Створити, після чого рендериться колекція.
