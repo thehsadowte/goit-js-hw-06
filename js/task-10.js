@@ -6,10 +6,10 @@ const refs = {
   boxesWrapper: document.querySelector('#boxes'),
   createBtn: document.querySelector('[data-create]'),
   destroyBtn: document.querySelector('[data-destroy]'),
-  input: document.querySelector('input'),
+  input: document.querySelector('input[type="number"]'),
 };
 
-const newArr = [];
+let newArr = [];
 let divSize = 30;
 
 function createBox() {
@@ -21,24 +21,27 @@ function createBox() {
 }
 
 const createBoxes = function (amount) {
-  for (let i = 0; i <= amount; i += 1) {
+  for (let i = 0; i < amount; i += 1) {
     createBox();
     divSize += 10;
+    console.log(amount);
   }
   refs.boxesWrapper.append(...newArr);
 };
 
-const destroyBoxes = () => {
+const destroyBoxes = event => {
   refs.boxesWrapper.innerHTML = '';
   refs.input.value = '';
+  newArr = [];
 };
 
 refs.createBtn.addEventListener('click', () => {
-  let amount = refs.input.value;
+  let amount = Number(refs.input.value);
   if (amount === '') {
     alert('Please enter a number!');
   } else {
     createBoxes(amount);
+    // console.log(amount);
   }
 });
 
