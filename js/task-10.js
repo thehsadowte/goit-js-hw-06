@@ -41,7 +41,8 @@ refs.createBtn.addEventListener('click', () => {
     alert('Please enter a number!');
   } else {
     createBoxes(amount);
-    // console.log(amount);
+    refs.input.value = '';
+    newArr = [];
   }
 });
 
